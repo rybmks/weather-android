@@ -1,5 +1,6 @@
 package com.example.weather.views.MainActivity;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
@@ -131,6 +132,7 @@ public class MainActivity extends AppCompatActivity implements IWeatherView, ILo
         textDescription.setText(message);
     }
 
+    @SuppressLint("SetTextI18n")
     @Override
     public void showWeather(WeatherData weatherData) {
         if (resolvedCity != null) {
@@ -145,8 +147,8 @@ public class MainActivity extends AppCompatActivity implements IWeatherView, ILo
         textDate.setText(formatted);
         textStatus.setText(weatherData.city);
         textCity.setText(weatherData.city);
-
-        textTemperature.setText(weatherData.temperature + "°");
+        @SuppressLint("DefaultLocale") var formatted_temp = String.format("%.1f", weatherData.temperature) + "°C";
+        textTemperature.setText(formatted_temp);
         textDescription.setText(weatherData.description);
         textWind.setText(weatherData.windSpeed + " m/s");
         textHumidity.setText(weatherData.humidity + "%");
